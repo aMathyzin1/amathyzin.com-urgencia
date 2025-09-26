@@ -3,828 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Meta tags para redes sociais -->
-  <meta property="og:title" content="aMathyzin - Sobre Nós">
-  <link rel="icon" href="https://amathyzin.com/logo.png" type="image/png">
-  <meta property="og:description" content="Conheça a história, missão e paixão por otimizações do aMathyzin, seu parceiro em performance para computadores.">
-  <meta property="og:image" content="https://amathyzin.com/imagens/og-image.jpg">
-  <meta property="og:url" content="https://amathyzin.com/sobre.html">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="aMathyzin - Sobre Nós">
-  <meta name="twitter:description" content="Saiba mais sobre a trajetória e os projetos inovadores do aMathyzin para otimização do seu PC.">
-  <meta name="twitter:image" content="https://amathyzin.com/imagens/og-image.jpg">
-  
-  <title>aMathyzin - Sobre Nós</title>
-  
-  <!-- Ícones, animações e bibliotecas -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-  
-  <style>
-    /* ==============================
-       Estilos Gerais e Variáveis
-       ============================== */
-    :root {
-      --primary: #ff6b6b;
-      --secondary: #4ecdc4;
-      --accent: #ffe66d;
-      --dark: #1a1a1a;
-      --neon-glow: 0 0 15px rgba(255, 107, 107, 0.8);
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-    body {
-      background: var(--dark);
-      color: white;
-      overflow-x: hidden;
-      perspective: 1000px;
-    }
-    
-    /* ==============================
-       Fundo de Partículas 3D
-       ============================== */
-    #particle-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-    }
-    
-    /* ==============================
-       Navbar
-       ============================== */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 5%;
-      background: rgba(25, 25, 25, 0.9);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      z-index: 1000;
-      border-bottom: 2px solid var(--primary);
-      box-shadow: var(--neon-glow);
-    }
-    .navbar::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(45deg, transparent 50%, rgba(255, 107, 107, 0.1));
-      pointer-events: none;
-    }
-    .logo {
-      font-size: 2rem;
-      font-weight: 700;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    .nav-links li {
-      list-style: none;
-    }
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      transition: 0.3s;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--primary);
-      transition: 0.3s;
-    }
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-    .hamburger {
-      display: none;
-      cursor: pointer;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .hamburger span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background: white;
-      transition: all 0.3s ease;
-    }
-    
-    /* ==============================
-       Botões (.btn)
-       ============================== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 2rem;
-      margin: 2rem 0;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      border: none;
-      border-radius: 50px;
-      color: white;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: 0.3s;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 25px rgba(255, 107, 107, 0.5);
-      z-index: 1;
-      text-decoration: none;
-    }
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-      transform: rotate(45deg);
-      transition: 0.5s;
-    }
-    .btn:hover::before {
-      animation: shine 1.5s;
-    }
-    @keyframes shine {
-      0% { left: -50%; }
-      100% { left: 150%; }
-    }
-    
-    /* ==============================
-       Seção Hero
-       ============================== */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(255, 107, 107, 0.1), transparent 60%);
-    }
-    .hero h1 {
-      font-size: 4rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5rem;
-      margin-bottom: 2rem;
-      animation: float 3s ease-in-out infinite;
-      text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
-      position: relative;
-      z-index: 1;
-    }
-    .hero p {
-      font-size: 1.5rem;
-      max-width: 600px;
-      margin: 0 auto;
-      opacity: 0.9;
-      position: relative;
-      z-index: 1;
-    }
-    .scroll-indicator {
-      margin-top: 20px;
-      font-size: 2.5rem;
-      color: red;
-      z-index: 1;
-      animation: arrowBounce 2s infinite;
-    }
-    @keyframes arrowBounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(10px); }
-      60% { transform: translateY(5px); }
-    }
-    
-    /* ==============================
-       Seção Sobre
-       ============================== */
-    .about {
-      padding: 5%;
-      background: rgba(0, 0, 0, 0.4);
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .about h2 {
-      position: relative;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: white;
-      z-index: 1;
-      text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
-    }
-    .about h2::before {
-      content: "";
-      position: absolute;
-      top: -8px;
-      left: -8px;
-      right: -8px;
-      bottom: -8px;
-      background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
-      background-size: 300%;
-      z-index: -1;
-      filter: blur(8px);
-      opacity: 0.8;
-      border-radius: 5px;
-      animation: movingGlow 4s ease-in-out infinite;
-    }
-    @keyframes movingGlow {
-      0% { background-position: 0% 0%; }
-      50% { background-position: 100% 100%; }
-      100% { background-position: 0% 0%; }
-    }
-    .about p {
-      font-size: 1.1rem;
-      max-width: 800px;
-      margin: 1rem auto;
-      line-height: 1.6;
-    }
-    
-    /* ==============================
-       Seção Equipe
-       ============================== */
-    .team-title {
-      font-size: 1.3rem;
-      margin: 1rem 0;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .team-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .team-member {
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid var(--primary);
-      padding: 1rem;
-      border-radius: 10px;
-      width: 200px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
-    }
-    .team-member .profile-pic {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 1rem;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid var(--primary);
-    }
-    .team-member .profile-pic img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .team-member h3 {
-      margin: 0.5rem 0;
-      font-size: 1.5rem;
-    }
-    .team-member p {
-      font-size: 0.9rem;
-      color: #ccc;
-    }
-    .email-box {
-      margin-top: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #222;
-      border-radius: 5px;
-      padding: 0.3rem 0.5rem;
-    }
-    .email-box input {
-      border: none;
-      background: transparent;
-      color: #fff;
-      text-align: center;
-      width: 100%;
-      font-size: 0.9rem;
-    }
-    .email-box input:focus {
-      outline: none;
-    }
-    .email-box button {
-      background: transparent;
-      border: none;
-      color: var(--secondary);
-      cursor: pointer;
-      padding: 0 0.3rem;
-    }
-    .email-box button:active {
-      transform: scale(0.95);
-    }
-    
-    /* Área para termos de serviço */
-    .terms-service {
-      margin-top: 2rem;
-      text-align: center;
-    }
-    .terms-service p {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
-    
-    /* ==============================
-       Seção Comunidade
-       ============================== */
-    .community {
-      padding: 5%;
-      background: rgba(0,0,0,0.3);
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .community h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-    .community p {
-      font-size: 1.1rem;
-      max-width: 800px;
-      margin: 1rem auto;
-      line-height: 1.6;
-    }
-    
-    /* ==============================
-       Footer
-       ============================== */
-    footer {
-      background: rgba(25,25,25,0.9);
-      padding: 3rem 5%;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      border-top: 2px solid var(--secondary);
-      box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
-      position: relative;
-      z-index: 1;
-    }
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin: 2rem 0;
-    }
-    .social-links a {
-      font-size: 1.5rem;
-      color: white;
-      transition: 0.3s;
-    }
-    .social-links a:hover {
-      color: var(--primary);
-      transform: scale(1.2);
-    }
-    .footer-links {
-      margin: 1rem 0;
-      font-size: 0.9rem;
-    }
-    .footer-links a {
-      color: white;
-      text-decoration: none;
-      margin: 0 0.5rem;
-    }
-    .footer-links a:hover {
-      text-decoration: underline;
-    }
-    
-    /* ==============================
-       Custom Scrollbar
-       ============================== */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #1a1a1a;
-    }
-    ::-webkit-scrollbar-thumb {
-      border-radius: 4px;
-      animation: thumbFade 3s infinite linear;
-    }
-    @keyframes thumbFade {
-      0% { background: #ff6b6b; }
-      33% { background: #ff4d4d; }
-      66% { background: #ff1a1a; }
-      100% { background: #ff6b6b; }
-    }
-    * {
-      scrollbar-width: thin;
-      scrollbar-color: #ff6b6b transparent;
-    }
-    
-    /* ==============================
-       Responsividade para telas menores
-       ============================== */
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: row;
-        padding: 1rem 3%;
-      }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background: rgba(25,25,25,0.95);
-        position: absolute;
-        top: 100%;
-        left: 0;
-        padding: 1rem 0;
-      }
-      .nav-links.active {
-        display: flex;
-      }
-      .hamburger {
-        display: flex;
-      }
-      .hero h1 {
-        font-size: 2.5rem;
-        letter-spacing: 0.3rem;
-      }
-      .hero p {
-        font-size: 1.2rem;
-        padding: 0 1rem;
-      }
-    }
-    
-    /* ==============================
-       Popup para notificações (fixo)
-       ============================== */
-    #popup-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 5000;
-    }
-    .popup {
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-size: 1rem;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
-    }
-    .popup.show {
-      opacity: 1;
-    }
-    .timer {
-      height: 4px;
-      background-color: green;
-      width: 100%;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      animation: timerBar 3s linear forwards;
-    }
-    @keyframes timerBar {
-      from { width: 100%; }
-      to   { width: 0; }
-    }
-  </style>
+  <title>Sobre aMathyzin</title>
+  <meta name="description" content="Conheça a história, a missão e os valores que movem o projeto de otimização aMathyzin.">
+  <meta property="og:title" content="aMathyzin – Sobre">
+  <meta property="og:description" content="Saiba como surgiu o projeto e por que milhares de pessoas confiam nas otimizações da comunidade.">
+  <meta property="og:image" content="https://amathyzin.com/img/thumb.png">
+  <meta property="og:url" content="https://amathyzin.com/info/sobre.html">
+  <meta property="og:type" content="article">
+  <link rel="icon" href="/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-  <!-- Fundo de partículas -->
-  <canvas id="particle-canvas"></canvas>
-  
-  <!-- Container para popups fixos (ex: "Você já está aqui!") -->
-  <div id="popup-container"></div>
-
-  <header>
-    <nav class="navbar" data-aos="fade-down">
-      <div class="logo">aMathyzin</div>
-      <!-- Menu Hamburger para dispositivos móveis -->
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="../index.html"><i class="fas fa-home"></i> Início</a></li>
-        <li><a href="../downloads/arquivos.html"><i class="fas fa-download"></i> Downloads</a></li>
-        <li><a href="sobre.html" id="about-link" class="active"><i class="fas fa-info-circle"></i> Sobre</a></li>
-        <li><a href="../redirects/github.html"><i class="fab fa-github"></i> GitHub</a></li>
-        <li><a href="../redirects/discord.html"><i class="fab fa-discord"></i> Comunidade</a></li>
-        <li><a href="../redirects/youtube.html"><i class="fab fa-youtube"></i> Vídeos</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Principal">
+        <a class="brand" href="/">
+          <img src="/logo.png" alt="Logotipo aMathyzin">
+          <span>aMathyzin</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" data-nav-toggle>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+          <span class="sr-only">Abrir navegação</span>
+        </button>
+        <div class="nav-links" id="menu-principal" data-nav>
+          <a href="/index.html">Início</a>
+          <a href="/downloads/arquivos.html">Downloads</a>
+          <a class="is-active" href="#sobre">Sobre</a>
+          <a href="/redirects/discord.html">Comunidade</a>
+          <a class="language-switch" href="/EN-US/index.html#about">English</a>
+        </div>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <!-- Seção Hero para "Sobre Nós" -->
-    <section class="hero" id="sobre-hero">
-      <h1 data-aos="zoom-in">Sobre a aMathyzin</h1>
-      <p data-aos="fade-up" data-aos-delay="200">
-        Conheça nossa história, missão e paixão por otimizações.
-      </p>
-      <!-- Scroll indicator com seta dinâmica -->
-      <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="600">
-        <i class="fas fa-arrow-down"></i>
+  <main id="sobre">
+    <section class="section">
+      <div class="container about-hero">
+        <div data-animate>
+          <span class="badge">Nossa jornada</span>
+          <h1 class="hero-title hero-title--compact">Um projeto que nasceu da vontade de otimizar e compartilhar</h1>
+          <p class="hero-description">Desde 2020 o aMathyzin entrega conteúdo gratuito para acelerar PCs, consoles e dispositivos móveis. O projeto evoluiu de vídeos tutoriais para uma plataforma completa com scripts, packs e suporte comunitário.</p>
+        </div>
+        <div class="highlight-block" data-animate>
+          <h2>Missão</h2>
+          <p>Empoderar pessoas com ferramentas acessíveis para extrair o máximo desempenho dos seus dispositivos, sem custos escondidos e com instruções claras.</p>
+          <h2>Visão</h2>
+          <p>Criar uma comunidade de tecnologia colaborativa que compartilha conhecimento e mantém o foco em segurança.</p>
+        </div>
       </div>
     </section>
 
-    <!-- Seção Sobre -->
-    <section class="about" id="about">
-      <h2 data-aos="fade-up">Nossa História</h2>
-      <p data-aos="fade-up" data-aos-delay="100">
-        Olá! Eu sou o aMathyzin – um entusiasta em otimizações de PC com mais de 4 anos de experiência. Minha paixão pela tecnologia me levou a dominar diversas linguagens, como JavaScript, Python, C++ e C#, e a me especializar em web design, edição de vídeo, programação, design gráfico, além do desenvolvimento de apps e jogos.
-      </p>
-      <p data-aos="fade-up" data-aos-delay="200">
-        Atualmente, estou empenhado em criar projetos inovadores para o meu canal no YouTube, também chamado aMathyzin. Mas a aMathyzin evoluiu: deixou de ser apenas uma pessoa para se tornar um projeto, um nome e uma organização. Nós nos reunimos para desenvolver os melhores apps de otimização de computadores, garantindo satisfação, desempenho superior e, principalmente, a segurança dos usuários – com a maioria dos projetos apresentando 0 detecções e todo o código sendo aberto no nosso GitHub oficial.
-      </p>
-      <h2 data-aos="fade-up" data-aos-delay="500">Nossa Missão</h2>
-      <p data-aos="fade-up" data-aos-delay="400">
-        Nosso objetivo é proporcionar a todos acesso máximo ao desempenho de seus computadores, criando soluções inovadoras, seguras e gratuitas que elevem a experiência tecnológica a um novo patamar.
-      </p>
-      <h2 data-aos="fade-up" data-aos-delay="500">Nossa Equipe</h2>
-      <p data-aos="fade-up" data-aos-delay="600">
-        Contamos com uma equipe dedicada que presta suporte, aprimora e evolui constantemente nossos projetos, fortalecendo a comunidade e garantindo a excelência em cada lançamento.
-      </p>
-      <!-- Texto adicional para equipe -->
-      <p class="team-title" data-aos="fade-up" data-aos-delay="650">Nossa equipe atual:</p>
-      <!-- Área da Equipe com perfis -->
-      <div class="team-container" data-aos="fade-up" data-aos-delay="700">
-        <!-- aMathyzin -->
-        <div class="team-member">
-          <div class="profile-pic">
-            <img src="./assets/amathyzin.jpg" alt="aMathyzin">
+    <section class="section">
+      <div class="container" data-animate>
+        <div class="section-header">
+          <h2>Linha do tempo</h2>
+          <p>Principais marcos que moldaram aMathyzin e a tornaram referência em otimizações gratuitas.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4>2020 – Primeiros tutoriais</h4>
+            <p>Os primeiros vídeos no YouTube apresentavam ajustes básicos de Windows e limpeza de arquivos temporários.</p>
           </div>
-          <h3>aMathyzin</h3>
-          <p>Dono, desenvolvedor e idealizador de projetos</p>
-          <div class="email-box">
-            <input type="text" value="contato@amathyzin.com" readonly>
-            <button onclick="copyEmail('contato@amathyzin.com', event)">
-              <i class="fas fa-copy"></i>
-            </button>
+          <div class="timeline-item">
+            <h4>2021 – Comunidade Discord</h4>
+            <p>Abertura do servidor oficial para centralizar suporte, novos scripts e feedback em tempo real dos membros.</p>
+          </div>
+          <div class="timeline-item">
+            <h4>2022 – Packs colaborativos</h4>
+            <p>Lançamento do pack especial de inscritos e de coleções desenvolvidas pela comunidade, como o aMathyBoost.</p>
+          </div>
+          <div class="timeline-item">
+            <h4>2023 em diante – Plataforma integrada</h4>
+            <p>Expansão para Xbox Cloud, mobile e criação de documentação detalhada para cada download disponível no site.</p>
           </div>
         </div>
-        <!-- MusashiSan -->
-        <div class="team-member">
-          <div class="profile-pic">
-            <img src="./assets/musashi.png" alt="aMathyzin">
-          </div>
-          <h3>Musashi</h3>
-          <p>Socio, diretor e instrutor de projetos</p>
-          <div class="email-box">
-            <input type="text" value="musashi@amathyzin.com" readonly>
-            <button onclick="copyEmail('musashi@amathyzin.com', event)">
-              <i class="fas fa-copy"></i>
-            </button>
-          </div>
-        </div>
-        <!-- Memphis -->
-        <div class="team-member">
-          <div class="profile-pic">
-            <img src="./assets/memphis.jpg" alt="Memphis">
-          </div>
-          <h3>Memphis</h3>
-          <p>Desenvolvedor e idealizador de projetos</p>
-          <div class="email-box">
-            <input type="text" value="memphisdev@amathyzin.com" readonly>
-            <button onclick="copyEmail('memphisdev@amathyzin.com', event)">
-              <i class="fas fa-copy"></i>
-            </button>
-          </div>
-        </div>
-        <!-- Whitezin -->
-        <div class="team-member">
-          <div class="profile-pic">
-            <img src="./assets/vicente.jpg" alt="Memphis">
-          </div>
-          <h3>Vicente</h3>
-          <p>Desenvolvedor</p>
-          <div class="email-box">
-            <input type="text" value="zfoxtech974@proton.me" readonly>
-            <button onclick="copyEmail('zfoxtech974@proton.me', event)">
-              <i class="fas fa-copy"></i>
-            </button>
-          </div>
-        </div>
-        <!-- Unknow -->
-        <div class="team-member">
-          <div class="profile-pic">
-            <img src="./assets/unknow.jpg" alt="Unknow">
-          </div>
-          <h3>Unknow</h3>
-          <p>Investidor secreto</p>
-          <div class="email-box">
-            <input type="text" value="Email indisponível" readonly>
-            <button onclick="copyEmail('Email indisponível', event)" disabled>
-              <i class="fas fa-copy"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Área dos Termos de Serviço -->
-      <div class="terms-service" data-aos="fade-up" data-aos-delay="800">
-        <p>Para mais informações, por favor leia os nossos <a href="../juridico/termos.html" style="color: var(--secondary); text-decoration: underline;">Termos de Serviço</a>.</p>
-        <a href="../juridico/termos.html" class="btn">Ver Termos</a>
       </div>
     </section>
-    
-    <!-- Seção Comunidade -->
-    <section class="community" id="community">
-      <h2 data-aos="fade-up">Nossa Comunidade</h2>
-      <p data-aos="fade-up" data-aos-delay="100">
-        Junte-se à nossa comunidade engajada, onde compartilhamos dicas, suporte e as últimas novidades sobre otimizações e performance para PCs.
-      </p>
-      <div data-aos="fade-up" data-aos-delay="200">
-        <a href="https://amathyzin.com/redirects/discord.html" target="_blank" class="btn">
-          <i class="fab fa-discord"></i> Entre no Discord
-        </a>
+
+    <section class="section">
+      <div class="container" data-animate>
+        <div class="section-header">
+          <h2>O que guia nossas decisões</h2>
+          <p>Princípios que garantem qualidade e segurança em cada atualização.</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>Transparência</h3>
+            <p>Todos os arquivos são acompanhados de notas de versão e orientações claras sobre o que é modificado em seu sistema.</p>
+          </article>
+          <article class="card">
+            <h3>Colaboração</h3>
+            <p>A comunidade ajuda a revisar scripts, sugerir melhorias e garantir que ninguém fique sem suporte.</p>
+          </article>
+          <article class="card">
+            <h3>Acessibilidade</h3>
+            <p>Conteúdo gratuito, em português e com vídeos passo a passo para diferentes níveis de conhecimento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Chamada para ação">
+      <div class="container" data-animate>
+        <div class="card">
+          <div class="grid grid--comfortable">
+            <div>
+              <h2>Participe da evolução</h2>
+              <p class="hero-description">Envie feedbacks, contribua com código e acompanhe novas ideias no Discord e no GitHub.</p>
+            </div>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="/redirects/discord.html">Entrar no Discord</a>
+              <a class="btn btn-ghost" href="/redirects/github.html">Ver repositórios</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="social-links" data-aos="fade-up">
-      <a href="https://github.com/amathyzin" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://www.youtube.com/@amathyzin" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://amathyzin.com/discord" target="_blank"><i class="fab fa-discord"></i></a>
+  <footer class="footer">
+    <div class="container">
+      <div class="social-links">
+        <a href="https://github.com/aMathyzin" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path fill-rule="evenodd" d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48 0-.23-.01-.83-.01-1.63-2.78.61-3.37-1.34-3.37-1.34-.45-1.15-1.1-1.45-1.1-1.45-.9-.62.07-.6.07-.6 1 .07 1.53 1.05 1.53 1.05.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.02a9.58 9.58 0 015 0c1.9-1.29 2.74-1.02 2.74-1.02.56 1.4.21 2.44.1 2.7.64.7 1.03 1.59 1.03 2.68 0 3.85-2.35 4.7-4.58 4.95.36.31.68.92.68 1.86 0 1.34-.01 2.42-.01 2.75 0 .26.18.57.69.48A10 10 0 0012 2z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@amathyzin" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+            <path d="M21.6 7.2s-.2-1.5-.8-2.2c-.8-.9-1.7-.9-2.1-1-3-.2-7.5-.2-7.5-.2h-.1s-4.5 0-7.5.2c-.4 0-1.3 0-2.1 1-.6.7-.8 2.2-.8 2.2S1 8.9 1 10.5v1c0 1.6.2 3.3.2 3.3s.2 1.5.8 2.2c.8.9 1.9.8 2.4.9 1.8.2 7.3.2 7.3.2s4.5 0 7.5-.2c.4-.1 1.3-.1 2.1-1 .6-.7.8-2.2.8-2.2s.2-1.6.2-3.3v-1c0-1.6-.2-3.3-.2-3.3zM9.75 13.9v-5l5.2 2.5-5.2 2.5z" />
+          </svg>
+        </a>
+        <a href="https://amathyzin.com/discord" target="_blank" rel="noopener" aria-label="Discord">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245 240" fill="currentColor" width="22" height="22" aria-hidden="true">
+            <path d="M104.4 104.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zm36.2 0c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z" />
+            <path d="M189.5 20h-134C37.6 20 26 31.6 26 46.5v147c0 14.9 11.6 26.5 29.5 26.5h114.1l-5.3-18.5 12.7 11.8 11.9 11 21.2 18.7V46.5c0-14.9-11.6-26.5-20.6-26.5zm-39.1 135s-3.7-4.4-6.8-8.3c13.5-3.8 18.6-12.1 18.6-12.1-4.2 2.7-8.2 4.6-11.8 5.9-5.1 2.1-10 3.4-14.8 4.2-9.8 1.8-18.8 1.3-26.6-.1-5.8-1.1-10.8-2.7-14.9-4.2-2.3-.9-4.8-2-7.4-3.4-.3-.2-.6-.3-.9-.5-.2-.1-.3-.2-.4-.2-1.8-1-2.8-1.7-2.8-1.7s4.9 8.1 17.8 12c-3.1 3.9-6.9 8.5-6.9 8.5-22.8-.7-31.5-15.6-31.5-15.6 0-33.1 14.8-59.9 14.8-59.9 14.8-11 28.8-10.7 28.8-10.7l1 1.2c-18.5 5.3-27 13.4-27 13.4s2.3-1.2 6.1-2.9c11.1-4.9 19.9-6.2 23.5-6.6.6-.1 1.1-.2 1.7-.2 6.1-.8 13-1 20.2-.2 9.5 1.1 19.7 3.9 30.1 9.5 0 0-8.1-7.7-25.7-13l1.4-1.6s14-.3 28.8 10.7c0 0 14.8 26.8 14.8 59.9 0 0-8.9 15-31.7 15.7z" />
+          </svg>
+        </a>
+      </div>
+      <div class="footer-links">
+        <a href="/juridico/termos.html">Termos de Serviço</a>
+        <a href="/juridico/privacy.html">Política de Privacidade</a>
+        <a href="/downloads/arquivos.html">Downloads</a>
+      </div>
+      <small>&copy; <span data-current-year></span> aMathyzin. Todos os direitos reservados.</small>
     </div>
-    <div class="footer-links" data-aos="fade-up">
-      <a href="../juridico/termos.html">Termos de Serviço</a> | 
-      <a href="../juridico/politica.html">Política de Privacidade</a>
-    </div>
-    <p data-aos="fade-up">&copy; 2025 aMathyzin. Todos os direitos reservados.</p>
   </footer>
-  
-  <!-- Inicialização do AOS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: 'ease-in-out-quad'
-    });
-    
-    // Fundo de partículas com Three.js
-    const canvas = document.getElementById('particle-canvas');
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 2;
-    
-    const particleCount = 5000;
-    const posArray = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount * 3; i++) {
-      posArray[i] = (Math.random() - 0.5) * 5;
-    }
-    const particles = new THREE.BufferGeometry();
-    particles.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    const material = new THREE.PointsMaterial({ size: 0.005, color: '#ff6b6b' });
-    const particleMesh = new THREE.Points(particles, material);
-    scene.add(particleMesh);
-    
-    let mouseX = 0, mouseY = 0;
-    document.addEventListener('mousemove', (event) => {
-      mouseX = event.clientX - window.innerWidth / 2;
-      mouseY = event.clientY - window.innerHeight / 2;
-    });
-    
-    function animate() {
-      requestAnimationFrame(animate);
-      particleMesh.rotation.y += 0.001;
-      const targetRotX = mouseY * 0.0001;
-      const targetRotY = mouseX * 0.0001;
-      particleMesh.rotation.x += (targetRotX - particleMesh.rotation.x) * 0.05;
-      particleMesh.rotation.y += (targetRotY - particleMesh.rotation.y) * 0.05;
-      renderer.render(scene, camera);
-    }
-    function resize() {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-    }
-    window.addEventListener('resize', resize);
-    resize();
-    animate();
-    
-    // Animações GSAP para a navbar
-    gsap.from('.logo', { duration: 1, opacity: 0, y: -50 });
-    gsap.from('.nav-links a', {
-      duration: 1,
-      opacity: 0,
-      y: -20,
-      stagger: 0.2,
-      delay: 0.5
-    });
-    
-    // Toggle do menu hamburger para dispositivos móveis
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-    
-    /**
-     * Função para exibir um popup.
-     * Se o parâmetro 'event' for informado, o popup será posicionado próximo do clique.
-     * Caso contrário, o popup será adicionado ao container fixo (#popup-container).
-     */
-    function showPopup(message, event) {
-      const popup = document.createElement("div");
-      popup.className = "popup";
-      popup.textContent = message;
-      
-      // Define um z-index alto para garantir que o popup apareça na frente
-      popup.style.zIndex = "10000";
-      
-      // Cria a barra de timer
-      const timerDiv = document.createElement("div");
-      timerDiv.className = "timer";
-      popup.appendChild(timerDiv);
-      
-      if (event) {
-        // Posiciona o popup próximo ao local do clique
-        popup.style.position = "absolute";
-        const posX = event.pageX;
-        const posY = event.pageY - 40; // offset de 40px acima do clique
-        popup.style.left = posX + "px";
-        popup.style.top = posY + "px";
-        document.body.appendChild(popup);
-      } else {
-        // Se não for passado um evento, adiciona no container fixo (canto superior direito)
-        document.getElementById("popup-container").appendChild(popup);
-      }
-      
-      setTimeout(() => popup.classList.add("show"), 10);
-      setTimeout(() => {
-        popup.classList.remove("show");
-        setTimeout(() => {
-          if (popup.parentNode) {
-            popup.parentNode.removeChild(popup);
-          }
-        }, 300);
-      }, 3000);
-    }
-    
-    /**
-     * Função para copiar o e-mail para a área de transferência.
-     * Recebe o 'event' para posicionar o popup próximo ao clique.
-     */
-    function copyEmail(email, event) {
-      navigator.clipboard.writeText(email)
-        .then(() => {
-          showPopup("E-mail copiado!", event);
-        })
-        .catch(err => {
-          console.error("Erro ao copiar o e-mail:", err);
-        });
-    }
-    
-    // Intercepta o clique no link "Sobre" para exibir o popup fixo caso já esteja na página
-    const aboutLink = document.getElementById("about-link");
-    aboutLink.addEventListener("click", function(event) {
-      if (window.location.pathname.endsWith("sobre.html")) {
-        event.preventDefault();
-        showPopup("Você já está aqui!");
-      }
-    });
-  </script>
-  <script src="../scripts/smooth-scroll.js"></script>
+
+  <script src="../assets/js/main.js" defer></script>
 </body>
 </html>
